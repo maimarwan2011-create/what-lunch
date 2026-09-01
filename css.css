@@ -1,0 +1,186 @@
+* {
+    font-family: 'Noto Kufi Arabic', 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+}
+
+.font-serif { font-family: 'Instrument Serif', serif; }
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* كل السيكشن اللي عليه id يبعد من فوق عشان الـ navbar يغطيه */
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes bounce-gentle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-bounce-gentle { animation: bounce-gentle 2s ease-in-out infinite; }
+
+.shimmer-text {
+    background: linear-gradient(90deg, #ffffff 0%, #10b981 25%, #ffffff 50%, #34d399 75%, #ffffff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+.card-hover:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px);
+}
+.card-hover:hover .card-border {
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.meal-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.btn-primary {
+    background: #ffffff;
+    color: #000000;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+.btn-primary:hover {
+    background: #e2e8f0;
+}
+
+.btn-emerald {
+    background: #10b981;
+    color: #ffffff;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+.btn-emerald:hover {
+    background: #059669;
+}
+
+.category-btn {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.category-btn.active {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    color: #10b981;
+}
+
+.recipe-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+.recipe-content.open {
+    max-height: 2000px;
+    opacity: 1;
+}
+
+.dice-spin {
+    animation: spin-slow 0.5s linear;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+.hero-glow {
+    background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.08) 0%, rgba(0,0,0,0) 60%);
+}
+
+.tag-ingredient {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    transition: all 0.2s ease;
+}
+.tag-ingredient:hover {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.step-number {
+    background: linear-gradient(135deg, #10b981, #059669);
+    min-width: 32px;
+    height: 32px;
+}
+
+.toast {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+/* Nav links */
+.nav-link {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+/* Fav button */
+.fav-btn {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.fav-btn:hover {
+    color: #ffffff !important;
+}

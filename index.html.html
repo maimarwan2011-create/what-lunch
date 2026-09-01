@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هنتغدي ايه انهارده؟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css.css">
+</head>
+<body class="bg-[#09090b] text-white min-h-screen">
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay fixed inset-0 z-50 pointer-events-none"></div>
+
+    <!-- Hero Glow -->
+    <div class="hero-glow fixed inset-0 z-0 pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 px-6 py-5" style="background: rgba(9,9,11,0.8); backdrop-filter: blur(12px);">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center">
+                    <i data-lucide="chef-hat" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="text-lg font-medium tracking-tight">هنتغدي ايه؟</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <span data-scroll-to="categories" class="nav-link text-sm text-zinc-400">الوجبات</span>
+                <span data-scroll-to="random" class="nav-link text-sm text-zinc-400">اقتراح عشوائي</span>
+                <button data-action="favorites" class="fav-btn flex items-center gap-2 text-sm text-zinc-400">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span id="fav-count">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center pt-20 px-6 relative">
+        <div class="text-center max-w-4xl mx-auto relative z-10">
+            <div class="animate-float mb-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-emerald-400 text-sm">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>اكتر من 20 وصفة مصرية</span>
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9] mb-6">
+                <span class="block">هنتغدي</span>
+                <span class="block shimmer-text">ايه النهارده؟</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto mb-10">
+                مش عارف تتغدى ايه؟ اختار وجبتك او ضغط عشان نقترحلك حاجة لذيذة بالمكونات والطريقة
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button data-action="random-hero" class="btn-emerald px-8 py-3.5 rounded-full text-base font-medium flex items-center gap-2 group">
+                    <i data-lucide="shuffle" class="w-5 h-5 group-hover:rotate-180 transition-transform duration-500"></i>
+                    اقترحلي حاجة
+                </button>
+                <button data-scroll-to="categories" class="btn-primary px-8 py-3.5 rounded-full text-base font-medium flex items-center gap-2">
+                    <i data-lucide="grid-3x3" class="w-5 h-5"></i>
+                    تصفح الوجبات
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Food Emojis -->
+        <div class="absolute top-1/4 right-10 text-4xl animate-float" style="animation-delay: 0s;">🍗</div>
+        <div class="absolute top-1/3 left-16 text-3xl animate-float" style="animation-delay: 1s;">🥘</div>
+        <div class="absolute bottom-1/3 right-20 text-3xl animate-float" style="animation-delay: 2s;">🧆</div>
+        <div class="absolute bottom-1/4 left-10 text-4xl animate-float" style="animation-delay: 3s;">🌶️</div>
+        <div class="absolute top-1/2 right-1/4 text-2xl animate-float" style="animation-delay: 1.5s;">🍞</div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce-gentle">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-zinc-600"></i>
+        </div>
+    </section>
+
+    <!-- Random Suggestion Section -->
+    <section id="random" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel rounded-2xl p-8 md:p-12 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl"></div>
+
+                <div class="text-center relative z-10">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 mb-6" id="dice-icon">
+                        <i data-lucide="dice-5" class="w-8 h-8 text-emerald-400"></i>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-3">اقتراح عشوائي</h2>
+                    <p class="text-zinc-400 font-light mb-8">اضغط وخلي القدر يقرر عنك</p>
+
+                    <button data-action="random-meal" class="btn-emerald px-10 py-4 rounded-full text-lg font-medium inline-flex items-center gap-3" id="random-btn">
+                        <i data-lucide="wand-2" class="w-5 h-5"></i>
+                        <span>يا تره ايه هيا؟</span>
+                    </button>
+
+                    <!-- Random Result -->
+                    <div id="random-result" class="mt-10 hidden">
+                        <div class="animate-scale-in">
+                            <div class="inline-block text-6xl mb-4" id="random-emoji">🍗</div>
+                            <h3 class="text-2xl md:text-3xl font-medium mb-2" id="random-name">-</h3>
+                            <p class="text-zinc-400 mb-2" id="random-category">-</p>
+                            <p class="text-zinc-500 text-sm mb-6" id="random-time">-</p>
+                            <div class="flex items-center justify-center gap-3">
+                                <button onclick="showRecipeById()" class="btn-primary px-6 py-2.5 rounded-full text-sm font-medium flex items-center gap-2">
+                                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                                    الوصفة
+                                </button>
+                                <button onclick="randomMeal()" class="px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-white/20 transition-colors flex items-center gap-2 cursor-pointer">
+                                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                    وجبة تانية
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-emerald-400 text-sm font-medium uppercase tracking-wider mb-3">الوجبات</p>
+                <h2 class="text-3xl md:text-4xl font-medium tracking-tight mb-4">اختار نوع الوجبة</h2>
+                <p class="text-zinc-400 font-light">اضغط على النوع عشان تشوف كل الاكلات المتاحة</p>
+            </div>
+
+            <!-- Category Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+                <button data-action="filter-meals" data-category="all" class="category-btn active px-5 py-2.5 rounded-full border border-white/10 text-sm font-medium" data-cat="all">
+                    الكل
+                </button>
+                <button data-action="filter-meals" data-category="breakfast" class="category-btn px-5 py-2.5 rounded-full border border-white/10 text-zinc-400 text-sm font-medium" data-cat="breakfast">
+                    🌅 فطار
+                </button>
+                <button data-action="filter-meals" data-category="lunch" class="category-btn px-5 py-2.5 rounded-full border border-white/10 text-zinc-400 text-sm font-medium" data-cat="lunch">
+                    ☀️ غدا
+                </button>
+                <button data-action="filter-meals" data-category="dinner" class="category-btn px-5 py-2.5 rounded-full border border-white/10 text-zinc-400 text-sm font-medium" data-cat="dinner">
+                    🌙 عشا
+                </button>
+                <button data-action="filter-meals" data-category="snack" class="category-btn px-5 py-2.5 rounded-full border border-white/10 text-zinc-400 text-sm font-medium" data-cat="snack">
+                    🍿 سناك
+                </button>
+            </div>
+
+            <!-- Meals Grid -->
+            <div id="meals-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden text-center py-20">
+                <div class="text-5xl mb-4">🔍</div>
+                <p class="text-zinc-400 text-lg">مفيش وجبات في التصنيف ده</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-24 px-6 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl md:text-4xl font-medium text-emerald-400 mb-1">20+</div>
+                    <div class="text-sm text-zinc-500">وصفة مصرية</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-medium text-emerald-400 mb-1">4</div>
+                    <div class="text-sm text-zinc-500">تصنيفات</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-medium text-emerald-400 mb-1">15</div>
+                    <div class="text-sm text-zinc-500">دقيقة اقصى</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-medium text-emerald-400 mb-1">∞</div>
+                    <div class="text-sm text-zinc-500">لذة</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <div class="w-6 h-6 rounded-md bg-emerald-500 flex items-center justify-center">
+                    <i data-lucide="chef-hat" class="w-4 h-4 text-white"></i>
+                </div>
+                <span class="font-medium">هنتغدي ايه؟</span>
+            </div>
+            <p class="text-zinc-600 text-sm">صنع بـ ❤️ لمحبي الاكل المصري</p>
+        </div>
+    </footer>
+
+    <!-- Recipe Modal -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="bg-[#0f0f0f] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
+                <div class="sticky top-0 bg-[#0f0f0f] border-b border-white/5 p-6 flex items-center justify-between z-10">
+                    <div>
+                        <h3 class="text-xl font-medium" id="modal-name">-</h3>
+                        <p class="text-sm text-zinc-500" id="modal-category-time">-</p>
+                    </div>
+                    <button onclick="closeModal()" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="p-6" id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="fav-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeFavorites()"></div>
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="bg-[#0f0f0f] border border-white/10 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto animate-scale-in">
+                <div class="sticky top-0 bg-[#0f0f0f] border-b border-white/5 p-6 flex items-center justify-between z-10">
+                    <h3 class="text-xl font-medium flex items-center gap-2">
+                        <i data-lucide="heart" class="w-5 h-5 text-red-400"></i>
+                        المفضلة
+                    </h3>
+                    <button onclick="closeFavorites()" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div class="p-6" id="fav-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed bottom-6 left-6 z-[60] flex flex-col gap-2"></div>
+
+    <script src="js.js"></script>
+</body>
+</html>
